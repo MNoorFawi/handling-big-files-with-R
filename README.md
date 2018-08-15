@@ -22,7 +22,7 @@ We will use the power of **chunked** package , <https://github.com/edwindj/chunk
 
 We will also explore some trick to load the data in chunks with **data.table**.
 
-###### N.B. we can also use the command line to do all this. <https://mnoorfawi.github.io/Large-Data-Processing-with-Command-Line/data_processing_command_line.html>
+###### N.B. we can also use the command line to do all this. <https://mnoorfawi.github.io/Large-Data-Processing-with-Command-Line/>
 
 Let's get down to business....
 
