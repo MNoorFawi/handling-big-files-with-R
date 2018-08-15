@@ -34,6 +34,7 @@ data_chunked %>%
   group_by(Class) %>%
   summarise(mean_age = mean(mean_age))
 
+library(ggplot2)
 data_chunked %>% 
   select(Class, Amount, Duration) %>%
   collect() %>%
@@ -63,18 +64,22 @@ library(sqldf)
 query <- 'SELECT * FROM file ORDER BY RANDOM() LIMIT 100'
 df <- read.csv.sql('german_credit.csv', 
                    sql = query)
+dim(df)
 
 indices <- data_chunked %>% 
   mutate(n = Purpose.Education > 0) %>%
   select(n) %>% 
   collect()
 indices <- indices[, 1]
+sum(indices)
 
 library(data.table)
 sequence  <- rle(indices)
 index  <- c(0, cumsum(sequence$lengths))[which(sequence$values)] + 1
 idx <- data.frame(start = index, 
                   length = sequence$length[which(sequence$values)])
+head(idx)
+
 data_fread <- do.call(
   rbind,
   apply(idx, 1, 
