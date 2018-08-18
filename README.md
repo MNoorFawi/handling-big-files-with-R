@@ -1,7 +1,7 @@
 manipulating large data with R
 ================
 
-Handling large data files with R using **chunked** and **data.table** packages.
+[Handling large data files with R using **chunked** and **data.table** packages.](https://github.com/MNoorFawi/handling-big-files-with-R)
 -------------------------------------------------------------------------------
 
 Here we are going to explore how can we read manipulate and analyse large data files with R.
