@@ -67,7 +67,7 @@ df <- read.csv.sql('german_credit.csv',
 dim(df)
 
 indices <- data_chunked %>% 
-  mutate(n = Purpose.Education > 0) %>%
+  mutate(n = Purpose.Business > 0) %>%
   select(n) %>% 
   collect()
 indices <- indices[, 1]
