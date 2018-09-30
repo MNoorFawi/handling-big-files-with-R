@@ -155,18 +155,18 @@ dim(df)
 
     ## [1] 100  63
 
-Now we are going to fetch specific rows from data in chunks with **data.table**. suppose we only need the rows with the Purpose.Education columns is TRUE. so first we get the indices of these rows.
+Now we are going to fetch specific rows from data in chunks with **data.table**. Suppose we only want to do analysis on people with purpose business, so we only need the rows with the "Purpose.Business" columns is TRUE. So first we get the indices of these rows.
 
 ``` r
 indices <- data_chunked %>% 
-  mutate(n = Purpose.Education > 0) %>%
+  mutate(n = Purpose.Business > 0) %>%
   select(n) %>% 
   collect()
 indices <- indices[, 1]
 sum(indices)
 ```
 
-    ## [1] 50
+    ## [1] 97
 
 Now we can chunk the data with **data.table::fread()** using **run length encoding rle()** to get the number of rows which each chunk will read and which it'll skip.
 
@@ -179,17 +179,17 @@ library(data.table)
 sequence  <- rle(indices)
 index  <- c(0, cumsum(sequence$lengths))[which(sequence$values)] + 1
 idx <- data.frame(start = index, 
-                   length = sequence$length[which(sequence$values)])
+                  length = sequence$length[which(sequence$values)])
 head(idx)
 ```
 
     ##   start length
-    ## 1     3      1
-    ## 2     6      1
-    ## 3    37      1
-    ## 4    69      1
-    ## 5    75      1
-    ## 6    88      1
+    ## 1    12      1
+    ## 2    18      1
+    ## 3    30      2
+    ## 4    34      1
+    ## 5    61      1
+    ## 6    63      2
 
 ``` r
 data_fread <- do.call(
@@ -200,7 +200,7 @@ data_fread <- do.call(
 dim(data_fread)
 ```
 
-    ## [1] 50 63
+    ## [1] 97 63
 
 ###### N.B. we must define the column names for the resulted data.frame.
 
